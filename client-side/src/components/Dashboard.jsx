@@ -5,6 +5,7 @@ const Dashboard = () => {
     const [packingList, setPackingList] = useState([]);
     const [newList, setNewList] = useState("");
     const navigate = useNavigate();
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     const fetchWithAuth = async (url, options = {}) => {
         const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchTrips = async () => {
             try {
-                const res = await fetchWithAuth("http://full-stack-minimalistpackinglist.onrender.com/api/trips");
+                const res = await fetchWithAuth(`${API_BASE_URL}/trips`);
                 if (!res.ok) throw new Error("Failed to fetch trips");
                 const data = await res.json();
                 setPackingList(data.map((trip) => ({
@@ -36,7 +37,7 @@ const Dashboard = () => {
         };
 
         fetchTrips();
-    }, [navigate]);
+    }, [navigate, API_BASE_URL]);
 
     const handleAddList = async () => {
         if (newList.trim() === "") return;
@@ -48,7 +49,7 @@ const Dashboard = () => {
         }
 
         try {
-            const res = await fetchWithAuth("https://full-stack-minimalistpackinglist.onrender.com/api/trips", {
+            const res = await fetchWithAuth(`${API_BASE_URL}/trips`, {
                 method: "POST",
                 body: JSON.stringify({ destination: newList.trim() }),
             });
@@ -64,7 +65,7 @@ const Dashboard = () => {
     const removeItem = async (index) => {
         const trip = packingList[index];
         try {
-            const res = await fetchWithAuth(`https://full-stack-minimalistpackinglist.onrender.com/api/trips/${trip.id}`, {
+            const res = await fetchWithAuth(`${API_BASE_URL}/trips/${trip.id}`, {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Failed to delete trip");
@@ -82,9 +83,7 @@ const Dashboard = () => {
     return (
         <div className="mt-10">
             <div className="absolute top-5 right-10">
-                <button onClick={handleLogout}>
-                    Logout
-                </button>
+                <button onClick={handleLogout}>Logout</button>
             </div>
             <h1 className="font-bold">Minimalist Packing Lists</h1>
             <div className="mt-20 flex justify-center gap-4">

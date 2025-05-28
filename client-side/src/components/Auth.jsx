@@ -13,8 +13,10 @@ const Auth = () => {
 
     const endpoint = isLogin ? 'login' : 'register';
     try{
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
       const response = await axios.post(
-        `https://full-stack-minimalistpackinglist.onrender.com/api/auth/${endpoint}`, 
+        `${API_BASE_URL}/auth/${endpoint}`,
+ 
         { email, password },
         { headers: { 'Content-Type': 'application/json'}}
       );

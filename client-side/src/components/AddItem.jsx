@@ -17,7 +17,7 @@ const AddItem = () => {
       };
   
       try {
-        const response = await fetch('http://full-stack-minimalistpackinglist.onrender.com/api/items', {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/items`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
