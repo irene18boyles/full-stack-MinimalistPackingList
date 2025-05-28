@@ -14,7 +14,7 @@ const Auth = () => {
     const endpoint = isLogin ? 'login' : 'register';
     try{
       const response = await axios.post(
-        `http://localhost:8000/api/auth/${endpoint}`, 
+        `http://https://full-stack-minimalistpackinglist.onrender.com/api/auth/${endpoint}`, 
         { email, password },
         { headers: { 'Content-Type': 'application/json'}}
       );

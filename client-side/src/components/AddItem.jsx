@@ -17,7 +17,7 @@ const AddItem = () => {
       };
   
       try {
-        const response = await fetch('http://localhost:8000/api/items', {
+        const response = await fetch('http://https://full-stack-minimalistpackinglist.onrender.com/api/items', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

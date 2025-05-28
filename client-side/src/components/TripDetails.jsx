@@ -21,7 +21,7 @@ const TripDetails = () => {
       const token = localStorage.getItem("token");
   
       try {
-        const response = await fetch(`http://localhost:8000/api/items/name/${tripName}`, {
+        const response = await fetch(`http://https://full-stack-minimalistpackinglist.onrender.com/api/items/name/${tripName}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ const TripDetails = () => {
   const updatePackingItemsInDB = async (itemId, itemData) => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`http://localhost:8000/api/items/${itemId}`, {
+      const response = await fetch(`http://https://full-stack-minimalistpackinglist.onrender.com/api/items/${itemId}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -88,7 +88,7 @@ const TripDetails = () => {
 
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`http://localhost:8000/api/items/${itemToRemove._id}`, {
+      const response = await fetch(`http://https://full-stack-minimalistpackinglist.onrender.com/api/items/${itemToRemove._id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}`}
       });
