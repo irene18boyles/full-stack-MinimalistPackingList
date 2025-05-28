@@ -17,22 +17,33 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(express.json());
+const allowedOrigins = [
+  'https://full-stack-minimalist-packing-list.vercel.app',
+  'https://full-stack-minimalist-packi-git-ffe2ad-irenes-projects-76dd413f.vercel.app',
+  'http://localhost:8000'
+];
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow server-to-server or Postman requests
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `The CORS policy for this site does not allow access from the origin: ${origin}`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
 }));
+
+app.use(express.json());
 app.use(helmet());
 
-// API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/items', itemRoutes);
 
-// Error handler
 app.use(errorHandler);
 
-// Serve frontend (React build)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
