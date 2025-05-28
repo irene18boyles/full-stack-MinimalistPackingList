@@ -21,7 +21,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchTrips = async () => {
             try {
-                const res = await fetchWithAuth("http://https://full-stack-minimalistpackinglist.onrender.com/api/trips");
+                const res = await fetchWithAuth("http://full-stack-minimalistpackinglist.onrender.com/api/trips");
                 if (!res.ok) throw new Error("Failed to fetch trips");
                 const data = await res.json();
                 setPackingList(data.map((trip) => ({
@@ -48,7 +48,7 @@ const Dashboard = () => {
         }
 
         try {
-            const res = await fetchWithAuth("http://https://full-stack-minimalistpackinglist.onrender.com/api/trips", {
+            const res = await fetchWithAuth("https://full-stack-minimalistpackinglist.onrender.com/api/trips", {
                 method: "POST",
                 body: JSON.stringify({ destination: newList.trim() }),
             });
@@ -64,7 +64,7 @@ const Dashboard = () => {
     const removeItem = async (index) => {
         const trip = packingList[index];
         try {
-            const res = await fetchWithAuth(`http://https://full-stack-minimalistpackinglist.onrender.com/api/trips/${trip.id}`, {
+            const res = await fetchWithAuth(`https://full-stack-minimalistpackinglist.onrender.com/api/trips/${trip.id}`, {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Failed to delete trip");
